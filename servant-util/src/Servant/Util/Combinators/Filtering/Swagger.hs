@@ -1,3 +1,5 @@
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE PackageImports #-}
 {-# LANGUAGE TypeInType #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -6,7 +8,11 @@ module Servant.Util.Combinators.Filtering.Swagger () where
 import Universum
 
 import Control.Lens ((<>~))
+#if MIN_VERSION_openapi3(3,2,5)
+import qualified "openapi3" Data.HashMap.Strict.InsOrd.Compat as HM
+#else
 import qualified Data.HashMap.Strict.InsOrd as HM
+#endif
 import qualified Data.OpenApi as O
 import qualified Data.Swagger as S
 import qualified Data.Text as T
